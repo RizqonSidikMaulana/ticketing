@@ -2,8 +2,11 @@
 
 namespace App\Config;
 
+require __DIR__ . './../vendor/autoload.php';
+
 use Exception;
 use PDO;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 /**
  * Class Config
@@ -17,15 +20,10 @@ class Config
      *
      * @throws Exception
      */
-    public function getParameter(string $key)
+    public function getParameter(string $key = "")
     {
-        if (!$key) {
-            throw new Exception("Parameter '$key' is missing.");
-        }
-
         $parameterLists = require __DIR__ . '/../params.php';
-
-        return $parameterLists[$key];
+        return ($key != "") ? $parameterLists[$key] : $parameterLists;
     }
 
     public function dbConnection()
@@ -36,5 +34,19 @@ class Config
             $param['db_driver'].':host='.$param['host'].';dbname='.$param['db_name'],
             $param['username'],
             $param['password']);
+    }
+
+    public function rabbitMQConnection(string $queueName)
+    {
+        $param = $this->getParameter('rabbitmq');
+        $connection = new AMQPStreamConnection($param['host'], $param['port'], $param['username'], $param['password']);
+        $channel = $connection->channel();
+        $channel->queue_declare($queueName, false, false, false, false);
+        
+        return [
+            'channel' => $channel,
+            'connection' => $connection,
+            'queueName' => $queueName,
+        ];
     }
 }

@@ -1,11 +1,13 @@
 <?php
 namespace App\Business\Domain;
 
-class Ticket {
+use Serializable;
+
+class Ticket implements Serializable{
     private int $id;
     private string $code;
     private int $eventId;
-    private string $status;
+    private bool $status;
     private string $createdAt;
     private string $updatedAt;
 
@@ -54,7 +56,7 @@ class Ticket {
         return $this->status;
     }
 
-    public function setStatus(string $status)
+    public function setStatus(bool $status)
     {
         $this->status=$status;
     }
@@ -77,6 +79,26 @@ class Ticket {
     public function setUpdatedAt(string $updatedAt)
     {
         $this->updatedAt=$updatedAt;
+    }
+
+    public function serialize() {
+        return serialize([
+            'id' => $this->id,
+            'code' => $this->code,
+            'eventId' => $this->eventId,
+            'status' => $this->status,
+            'createdAt' => $this->createdAt,
+        ]);
+    }
+
+    public function unserialize($data) {
+        $unserialized = unserialize($data);
+        $this->id = $unserialized['id'];
+        $this->code = $unserialized['code'];
+        $this->eventId = $unserialized['eventId'];
+        $this->status = $unserialized['status'];
+        $this->createdAt = $unserialized['createdAt'];
+    
     }
     
 }

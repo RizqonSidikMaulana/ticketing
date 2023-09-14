@@ -1,0 +1,1 @@
+cd Controller && php cmd.php generate

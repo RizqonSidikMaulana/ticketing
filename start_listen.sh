@@ -1,0 +1,1 @@
+cd Controller && nohup php cmd.php listen > /dev/null 2>&1 &

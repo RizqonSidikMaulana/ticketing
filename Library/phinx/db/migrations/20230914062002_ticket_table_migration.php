@@ -25,7 +25,7 @@ final class TicketTableMigration extends AbstractMigration
         ->addColumn('status', 'boolean')
         ->addColumn('ticket_code', 'string')
         ->addTimestamps()
-        ->addIndex(['event_id'], ['unique' => true])
+        ->addIndex(['ticket_code'], ['unique' => true])
         ->addForeignKey('event_id', 'event', 'id');
 
      $table->create();
