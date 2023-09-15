@@ -5,9 +5,9 @@ System Pengelolaan tiket menggunakan PHP native.
 
 # Installation
 - **Prerequisite**
-		- PHP 8.0
-		- RabbitMq
-		- Composer
+	- PHP 8.0
+	- RabbitMq
+	- Composer
 - Install dependency terlebih dahulu dengan menggunakan perintah `composer install`.
 - Sesuaikan konfigurasi database anda di file `/Library/Phinx/phinx.json` dan di file `params.php`
 > Jangan lupa untuk membuat database terlebih dahulu sebelum melakukan migrasi.
