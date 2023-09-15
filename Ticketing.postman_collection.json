@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fe5b7832-b106-4c40-8389-179acb9c3d77",
+		"_postman_id": "a9fc75a6-a333-4b39-a487-9919a3e482b0",
 		"name": "Ticketing",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "2979049"
@@ -40,7 +40,20 @@
 			"name": "Check Ticket",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/ticket/1/DTK8JW9OCV",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"ticket",
+						"1",
+						"DTK8JW9OCV"
+					]
+				}
 			},
 			"response": []
 		}
