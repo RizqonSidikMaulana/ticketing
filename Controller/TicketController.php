@@ -53,6 +53,15 @@ class TicketController {
     {
         $id = $req['id'];
         $code = $req['code'];
+        
+        if (!key_exists('status', $req)) {
+            return [
+                'status' => false,
+                'message' => 'status invalid',
+                'data' => []
+            ];
+        }
+
         $status = $req['status'];
 
         if (!is_numeric($req['id']) || strlen($req['code']) != 10 || !is_bool($status)) {
