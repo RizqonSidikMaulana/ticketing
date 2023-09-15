@@ -45,7 +45,16 @@ class TicketController {
 
         $ticketService = new TicketService($ticketRepo, $eventRepo, $db, $param);
 
-        return $ticketService->checkTicketStatus($ticket);
+        $result = $ticketService->checkTicketStatus($ticket);
+        if (!$result['status']) {
+            return $result;
+        }
+
+        $data['ticket_code'] = $result['data']['ticket_code'];
+        $data['status'] = $result['data']['status'];
+        $result['data'] = $data;
+        
+        return $result;
         
     }
 
@@ -53,7 +62,7 @@ class TicketController {
     {
         $id = $req['id'];
         $code = $req['code'];
-        
+
         if (!key_exists('status', $req)) {
             return [
                 'status' => false,
@@ -83,11 +92,20 @@ class TicketController {
 
         $ticketService = new TicketService($ticketRepo, $eventRepo, $db, $param);
         $result = $ticketService->checkTicketStatus($ticket);
-
         if (!$result['status']) {
             return $result;
         }
 
-        return $ticketService->updateTicket($ticket, $status);
+        $result = $ticketService->updateTicket($ticket, $status);
+        if (!$result['status']) {
+            return $result;
+        }
+
+        $data['ticket_code'] = $result['data']['ticket_code'];
+        $data['status'] = $result['data']['status'];
+        $data['updated_at'] = $result['data']['updated_at'];
+        $result['data'] = $data;
+        
+        return $result;
     }
 }
