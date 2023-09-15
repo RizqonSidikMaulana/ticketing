@@ -106,6 +106,7 @@ class Ticket implements Serializable{
         return [
             'id' => $this->id,
             'event_id' => $this->eventId,
+            'ticket_code' => $this->code,
             'status' => !$this->status ? 'available' : 'claimed',
             'created_at' => $this->createdAt,
             'updated_at' => $this->updatedAt,
