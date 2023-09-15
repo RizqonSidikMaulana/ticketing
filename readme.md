@@ -13,7 +13,7 @@ System Pengelolaan tiket menggunakan PHP native.
 > Jangan lupa untuk membuat database terlebih dahulu sebelum melakukan migrasi.
 - Sesuaikan kredensial RabbitMq di file `params.php`
 - Lakukan migrasi dengan perintah `./migration.sh` dan jalankan seeder dengan perintah `./seed.sh`.
-- Sebelum men-generate ticket jalankan terlebih dahulu perintah `./start_listen.sh` untuk membuat RabbitMq bersiap menerima request membuat ticket.
+- Sebelum men-generate ticket jalankan terlebih dahulu perintah `./start_listen.sh` untuk membuat RabbitMq bersiap menerima request.
 - Untuk men-generate ticket dapat dengan menjalankan perintah `./generate_ticket.sh {event_id} {total_ticket}`
 - Aktifkan server rest api dengan perintah `./start_rest.sh`
 - Collection sudah disediakan di root directory. silahkan untuk di import di postman
