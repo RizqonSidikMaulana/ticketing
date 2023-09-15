@@ -78,7 +78,7 @@ class Ticket implements Serializable{
 
     public function setUpdatedAt(string $updatedAt)
     {
-        $this->updatedAt=$updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     public function serialize() {
@@ -99,6 +99,17 @@ class Ticket implements Serializable{
         $this->status = $unserialized['status'];
         $this->createdAt = $unserialized['createdAt'];
     
+    }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'event_id' => $this->eventId,
+            'status' => !$this->status ? 'available' : 'claimed',
+            'created_at' => $this->createdAt,
+            'updated_at' => $this->updatedAt,
+        ];
     }
     
 }

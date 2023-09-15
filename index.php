@@ -1,8 +1,9 @@
 <?php
+require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/Config/Application.php';
 
 use App\Config\Application;
 
-require __DIR__ . '/vendor/autoload.php';
-
 $app = new Application();
-$app->run();
+$router = new AltoRouter();
+$app->run($router);

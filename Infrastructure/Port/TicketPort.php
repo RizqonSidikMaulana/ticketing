@@ -4,8 +4,8 @@ namespace App\Infrastructure\Port;
 
 use App\Business\Domain\Ticket;
 
-interface TicketPort { 
+interface TicketPort {
     public function createTicket(Ticket $ticket, $dbConn);
-    // public function checkTicketStatus(int $eventId, string $ticketCode);
-    // public function updateTicket(int $eventId, string $ticketCode, bool $status);
+    public function checkTicketStatus(Ticket $ticket, $dbConn);
+    public function updateTicket(Ticket $ticket, bool $status, $dbConn);
 }

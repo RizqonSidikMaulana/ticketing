@@ -2,6 +2,8 @@
 
 namespace App\Infrastructure\Port;
 
-interface EventPort { 
-    public function getEvent(int $eventId, $dbConn);
+use App\Business\Domain\Event;
+
+interface EventPort {
+    public function getEvent(Event $event, $dbConn);
 }

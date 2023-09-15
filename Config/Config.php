@@ -4,22 +4,11 @@ namespace App\Config;
 
 require __DIR__ . './../vendor/autoload.php';
 
-use Exception;
 use PDO;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
-/**
- * Class Config
- */
 class Config
 {
-    /**
-     * @param string $key
-     *
-     * @return mixed
-     *
-     * @throws Exception
-     */
     public function getParameter(string $key = "")
     {
         $parameterLists = require __DIR__ . '/../params.php';

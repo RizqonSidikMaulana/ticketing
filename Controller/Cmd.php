@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Business\Controller;
+namespace App\Controller;
 
 require __DIR__ . './../vendor/autoload.php';
 require __DIR__ . './../Business/Service/TicketService.php';
@@ -23,12 +23,13 @@ if ($argc < 2) {
 $command = $argv[1];
 
 if ($command === 'generate') {
-    if ($argc == 4) {        
+    if ($argc == 4) {
         // Validate character.
         if (!is_numeric($argv[2]) || !is_numeric($argv[3])) {
             echo "Please use number only for [event_id] and [total_ticket]\n";
             exit(1);
         }
+        
         // Validate numbers.
         $id = intval($argv[2]);
         $total = intval($argv[3]);
@@ -46,7 +47,7 @@ if ($command === 'generate') {
         // Initiate repository and service.
         $ticketRepo = new TicketRepo();
         $eventRepo = new EventRepo();
-        $port = new TicketService($ticketRepo, $eventRepo, $db, $rabbitMq, $param);
+        $port = new TicketService($ticketRepo, $eventRepo, $db, $param, $rabbitMq);
 
         // Object Ticket.
         $ticket = new Ticket();
@@ -54,6 +55,9 @@ if ($command === 'generate') {
         $ticket->setStatus(false);
 
         echo $port->generateTicket($ticket, $total) . "\n";
+    } else {
+        echo "Unknown command: $command\n";
+        exit(1);
     }
 } elseif ($command == 'listen') {
     // Get Configuration.
@@ -65,11 +69,9 @@ if ($command === 'generate') {
     // Initiate repository and service.
     $ticketRepo = new TicketRepo();
     $eventRepo = new EventRepo();
-    $port = new TicketService($ticketRepo, $eventRepo, $db, $rabbitMq, $param);
+    $port = new TicketService($ticketRepo, $eventRepo, $db, $param, $rabbitMq);
 
     $port->createTicket();
-} elseif ($command == 'serve') {
-    shell_exec('cd .. & php -S localhost:8000');
 } else {
     echo "Unknown command: $command\n";
     exit(1);
